@@ -1,15 +1,13 @@
 <x-layout>
-    <x-card class="p-10 fixed-center rounded max-w-xl mx-auto mt-24">
-        <div class="mb-6">
-            <button type="submit" class="bg-laravel rounded py-2 px-4 hover:bg-black">
-             <a href="/login" class="text-white">Login</a>
-            </button>
+    <x-card class="p-10 rounded max-w-xl mx-auto mt-24">
+        <div class="mb-6 px-48">
+            <a href="/login"><button type="submit" href="/login" class="text-white bg-laravel rounded py-2 px-4 hover:bg-black">Login
+            </button></a>
           </div>
-          <div class="mb-6">
-            <button type="submit" class="bg-laravel py-2 px-4 hover:bg-black rounded">
-             <a  href="/register" class="text-white"> Create account</a>
-            </button>
+          <div class="px-40">
+            <a  href="/register"><button type="submit" class="bg-laravel py-2 px-4 hover:bg-black rounded text-white">Create account
           </div>
+      </div>
         </div>
     </x-card>
 </x-layout>

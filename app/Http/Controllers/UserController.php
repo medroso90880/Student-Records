@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -34,8 +36,28 @@ class UserController extends Controller
         // Login
         auth()->login($user);
 
-        return redirect('/admin')->with('message', 'User created and logged in');
-    }
+        $user_type = $user->user_type;
+        if($user_type == 'admin')
+        {
+            return redirect('/admin-home');
+        }
+        elseif($user_type == 'student')
+        {
+            return redirect('/student-home');
+        }
+        elseif($user_type == 'guidance')
+        {
+            return redirect('/guidance-home');
+        }
+        elseif($user_type == 'do')
+        {
+            return redirect('/decipline-officer-home');
+        }
+        else
+        {
+            return redirect('/registrar-home');
+        }
+    }   
 
     public function logout(Request $request) {
         auth()->logout();
@@ -50,7 +72,7 @@ class UserController extends Controller
         return view('users.loginForm');
     }
 
-    public function authenticate(Request $request) {
+    public function authenticate(Request $request) { 
         $formFields = $request->validate([
             'email' => ['required','email'],
             'password' => 'required',
@@ -60,10 +82,30 @@ class UserController extends Controller
         if(auth()->attempt($formFields)) {
             $request->session()->regenerate();
 
-            return redirect('/')->with('message','you are now log in');
+            $user_type = Auth::user()->user_type;
+            if($user_type == 'admin')
+            {
+                return redirect('/admin-home');
+            }
+            elseif($user_type == 'student')
+            {
+                return redirect('/student-home');
+            }
+            elseif($user_type == 'guidance')
+            {
+                return redirect('/guidace-home');
+            }
+            elseif($user_type == 'do')
+            {
+                return redirect('/decipline-officer-home');
+            }
+            else
+            {
+                return redirect('/registrar-home');
+            }
         }
 
-        return back()->withErrors(['email' => 'Invalid Credenrials'])->onlyInput('email');
+        return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
 
     }
 }
