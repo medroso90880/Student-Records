@@ -68,8 +68,13 @@ class UserController extends Controller
         return redirect('/')->with('messagge','you have been logout');
     }
 
+    public function logoutform(){
+        return view('users.logout');
+    }
+
     public function login() {
         return view('users.loginForm');
+        return back();
     }
 
     public function authenticate(Request $request) { 

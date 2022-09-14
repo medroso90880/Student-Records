@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'registrar' => \App\Http\Middleware\RegistrarMiddleware::class,
         'do' => \App\Http\Middleware\DoMiddleware::class,
         'student' => \App\Http\Middleware\StudentMiddleware::class,
+        'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
     ];
 }

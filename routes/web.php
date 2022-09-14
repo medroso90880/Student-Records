@@ -19,14 +19,15 @@ use App\Http\Controllers\RegistrarController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::group(['middleware' => 'prevent-back-history'],function(){
 //login or create options
-Route::get('/',[UserController::class, 'signin']);
+Route::get('/',[UserController::class, 'signin'])->middleware('prevent-back-history');
 //show login form
 
-Route::get('/login',[UserController::class, 'login']);
+Route::get('/login',[UserController::class, 'login'])->middleware('guest');
 
 //create user form 
-Route::get('/register',[UserController::class, 'register']);
+Route::get('/register',[UserController::class, 'register'])->middleware('guest');
 
 //create new user 
 Route::post('/store_user',[UserController::class, 'store']);
@@ -34,9 +35,11 @@ Route::post('/store_user',[UserController::class, 'store']);
 //logout user
 Route::post('/logout',[UserController::class, 'logout']);
 
+//logout form
+Route::get('/logout-form',[UserController::class, 'logoutform']);
 
 //admin home page
-Route::get('/admin-home',[AdminController::class, 'dashboard'])->middleware('admin');
+Route::get('/admin-home',[AdminController::class, 'dashboard'])->middleware('admin','prevent-back-history');
 
 //student home page
 Route::get('/student-home',[StudentController::class, 'dashboard'])->middleware('student');
@@ -52,3 +55,5 @@ Route::get('/decipline-officer-home',[DoController::class, 'dashboard'])->middle
 
 //authenticate user
 Route::post('user/authenticate',[UserController::class, 'authenticate']);
+
+});
