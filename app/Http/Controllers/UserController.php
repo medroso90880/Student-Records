@@ -25,7 +25,7 @@ class UserController extends Controller
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'user_type' => 'required',
             'password' => 'required|confirmed|min:6'
-        ]);
+        ]); 
 
         // Hash Password
         $formFields['password'] = bcrypt($formFields['password']);
@@ -112,5 +112,8 @@ class UserController extends Controller
 
         return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
 
+    }
+    public function sample(){
+        return view('sample');
     }
 }

@@ -1,7 +1,7 @@
 <x-layout>
     <x-card class="p-10 rounded max-w-xl mx-auto mt-24">
         <div class="mb-6 px-48">
-            <a href="/login"><button type="submit" href="/login" class="text-white bg-laravel rounded py-2 px-4 hover:bg-black">Login
+            <a href="{{route('googlelogin')}}"><button type="submit" href="/login" class="text-white bg-laravel rounded py-2 px-4 hover:bg-black">Google Login
             </button></a>
           </div>
           <div class="px-40">

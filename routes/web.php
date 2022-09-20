@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DoController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
@@ -55,5 +56,11 @@ Route::get('/decipline-officer-home',[DoController::class, 'dashboard'])->middle
 
 //authenticate user
 Route::post('user/authenticate',[UserController::class, 'authenticate']);
+
+//google authenticate
+Route::get('/auth/google/redirect', [AuthController::class, 'googleredirect'])->name('googlelogin');
+Route::get('/auth/google/callback', [AuthController::class, 'googlecallback']);
+
+Route::get('/sample', [UserContoller::class, 'sample']);
 
 });
