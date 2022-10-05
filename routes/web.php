@@ -22,25 +22,17 @@ use App\Http\Controllers\RegistrarController;
 */
 Route::group(['middleware' => 'prevent-back-history'],function(){
 //login or create options
-Route::get('/',[UserController::class, 'signin'])->middleware('prevent-back-history');
+Route::get('/',[UserController::class, 'index'])->middleware('prevent-back-history');
 //show login form
 
-Route::get('/login',[UserController::class, 'login'])->middleware('guest');
-
-//create user form 
-Route::get('/register',[UserController::class, 'register'])->middleware('guest');
-
-//create new user 
-Route::post('/store_user',[UserController::class, 'store']);
-
 //logout user
-Route::post('/logout',[UserController::class, 'logout']);
+Route::get('/logout',[AuthController::class, 'logout']);
 
 //logout form
-Route::get('/logout-form',[UserController::class, 'logoutform']);
+//Route::get('/logout-form',[UserController::class, 'logoutform']);
 
 //admin home page
-Route::get('/admin-home',[AdminController::class, 'dashboard'])->middleware('admin','prevent-back-history');
+Route::get('/admin-home',[AdminController::class, 'dashboard'])->middleware('admin');
 
 //student home page
 Route::get('/student-home',[StudentController::class, 'dashboard'])->middleware('student');
@@ -54,13 +46,11 @@ Route::get('/registrar-home',[RegistrarController::class, 'dashboard'])->middlew
 //do home page
 Route::get('/decipline-officer-home',[DoController::class, 'dashboard'])->middleware('do');
 
-//authenticate user
-Route::post('user/authenticate',[UserController::class, 'authenticate']);
 
 //google authenticate
-Route::get('/auth/google/redirect', [AuthController::class, 'googleredirect'])->name('googlelogin');
-Route::get('/auth/google/callback', [AuthController::class, 'googlecallback']);
+Route::get('/auth/google/redirect', [AuthController::class, 'redirect']);
+Route::get('/auth/google/callback', [AuthController::class, 'callback']);
 
-Route::get('/sample', [UserContoller::class, 'sample']);
+Route::get('/sample', [UserController::class, 'sample']);
 
 });
